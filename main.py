@@ -35,7 +35,7 @@ def run():
             await sender.send_message(interaction, message, receive)
         except Exception as e:
             logger.error(f"Error chat: {e}")
-            await interaction.followup.send('> **Error: {e}**')
+            await interaction.followup.send(f"> **Error: {e}**")
 
     @client.tree.command(name="imagine", description="Generate image from text")
     async def imagine(interaction: discord.Interaction, *, prompt: str):
