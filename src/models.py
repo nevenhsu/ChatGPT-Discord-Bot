@@ -18,7 +18,7 @@ class OpenAIModel(ModelInterface):
 
     def text_completion(self, prompt: str) -> str:
         response = openai.ChatCompletion.create(
-            engine=self.model_engine,
+            model=self.model_engine,
             prompt=prompt,
             max_tokens=self.max_tokens,
             stop=None,
