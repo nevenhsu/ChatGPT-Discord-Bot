@@ -13,7 +13,8 @@ from src.server import keep_alive
 
 load_dotenv()
 
-models = OpenAIModel(api_key=os.getenv('OPENAI_API'), model_engine=os.getenv('OPENAI_MODEL_ENGINE'), max_tokens=int(os.getenv('OPENAI_MAX_TOKENS')))
+models = OpenAIModel(api_key=os.getenv('OPENAI_API'), model_engine=os.getenv(
+    'OPENAI_MODEL_ENGINE'), max_tokens=int(os.getenv('OPENAI_MAX_TOKENS')))
 
 memory = Memory()
 chatgpt = ChatGPT(models, memory)
@@ -28,9 +29,13 @@ def run():
     async def chat(interaction: discord.Interaction, *, message: str):
         if interaction.user == client.user:
             return
-        await interaction.response.defer()
-        receive = chatgpt.get_response(interaction.user, message)
-        await sender.send_message(interaction, message, receive)
+        try:
+            await interaction.response.defer()
+            receive = chatgpt.get_response(interaction.user, message)
+            await sender.send_message(interaction, message, receive)
+        except Exception as e:
+            logger.error(f"Error resetting memory: {e}")
+            await interaction.followup.send('> Oops! Something went wrong. <')
 
     @client.tree.command(name="imagine", description="Generate image from text")
     async def imagine(interaction: discord.Interaction, *, prompt: str):
