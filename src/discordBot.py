@@ -28,7 +28,7 @@ class Sender():
     async def send_message(self, interaction, send, receive):
         try:
             user_id = interaction.user.id
-            response = f'> **{send}** - <@{str(user_id)}> \n\n {receive}'
+            response = f'> **{send[:50]}** - <@{str(user_id)}> \n\n {receive}'
             await interaction.followup.send(response)
             logger.info(f"{user_id} sent: {send}, response: {receive}")
         except Exception as e:
@@ -38,7 +38,7 @@ class Sender():
     async def send_image(self, interaction, send, receive):
         try:
             user_id = interaction.user.id
-            response = f'> **{send}** - <@{str(user_id)}> \n\n'
+            response = f'> **{send[:50]}** - <@{str(user_id)}> \n\n'
             await interaction.followup.send(response)
             await interaction.followup.send(receive)
             logger.info(f"{user_id} sent: {send}, response: {receive}")
