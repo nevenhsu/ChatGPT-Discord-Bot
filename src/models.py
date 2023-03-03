@@ -3,7 +3,7 @@ import textwrap
 
 
 class ModelInterface:
-    def chat_completion(self, prompt: str) -> str:
+    def chat_completion(self, messages: list) -> str:
         pass
 
     def image_generation(self, prompt: str) -> str:
@@ -17,10 +17,7 @@ class OpenAIModel(ModelInterface):
         self.max_tokens = max_tokens
         self.image_size = image_size
 
-    def chat_completion(self, prompt: str) -> str:
-        prompts = textwrap.wrap(prompt, 4000)
-        messages = list(map(toMessage, prompts))
-
+    def chat_completion(self, messages: list) -> str:
         response = openai.ChatCompletion.create(
             model=self.model_engine,
             messages=messages,
@@ -39,7 +36,3 @@ class OpenAIModel(ModelInterface):
         )
         image_url = response.data[0].url
         return image_url
-
-
-def toMessage(s: str):
-    return {"role": "user", "content": s}
