@@ -28,8 +28,13 @@ class Sender():
     async def send_message(self, interaction, send, receive):
         try:
             user_id = interaction.user.id
-            response = f'> **{send[:50]}** - <@{str(user_id)}> \n\n {receive}'
-            await interaction.followup.send(response)
+            header = f'> **{send[:50]}** - <@{str(user_id)}> \n\n '
+            await interaction.followup.send(header)
+
+            responses = f"{receive}".split('\n\n')
+            for res in responses:
+                await interaction.followup.send(res)
+
             logger.info(f"{user_id} sent: {send}, response: {receive}")
         except Exception as e:
             await interaction.followup.send(f"> **Error: {e}**")
