@@ -1,4 +1,5 @@
 import openai
+import textwrap
 
 
 class ModelInterface:
@@ -17,7 +18,9 @@ class OpenAIModel(ModelInterface):
         self.image_size = image_size
 
     def chat_completion(self, prompt: str) -> str:
-        messages = [{"role": "user", "content": prompt}]
+        prompts = textwrap.wrap(prompt, 4000)
+        messages = list(map(toMessage, prompts))
+
         response = openai.ChatCompletion.create(
             model=self.model_engine,
             messages=messages,
@@ -36,3 +39,7 @@ class OpenAIModel(ModelInterface):
         )
         image_url = response.data[0].url
         return image_url
+
+
+def toMessage(s: str):
+    return {"role": "user", "content": s}
