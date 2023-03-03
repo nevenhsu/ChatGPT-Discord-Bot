@@ -32,7 +32,7 @@ class Sender():
             await interaction.followup.send(response)
             logger.info(f"{user_id} sent: {send}, response: {receive}")
         except Exception as e:
-            await interaction.followup.send('> **Error: Something went wrong, please try again later!**')
+            await interaction.followup.send(f"> **Error: {e}**")
             logger.exception(f"Error while sending:{send} in chatgpt model, error: {e}")
 
     async def send_image(self, interaction, send, receive):
