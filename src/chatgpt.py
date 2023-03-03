@@ -9,10 +9,11 @@ class ChatGPT:
 
     def get_response(self, user_id: str, text: str) -> str:
         prompt = {"role": "user", "content": text}
-        messages = [].append(prompt) if self.memory is None else self.memory.get(user_id).append(prompt)
+        prev = [] if self.memory is None else self.memory.get(user_id)
+        messages = [*prev, prompt]
         response = self.model.chat_completion(messages)
         if self.memory is not None:
-            self.memory.append(user_id, {"role": "user", "content": prompt})
+            self.memory.append(user_id, prompt)
             self.memory.append(user_id, {"role": "assistant", "content": response})
         return response
 
