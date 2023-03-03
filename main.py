@@ -34,8 +34,8 @@ def run():
             receive = chatgpt.get_response(interaction.user, message)
             await sender.send_message(interaction, message, receive)
         except Exception as e:
-            logger.error(f"Error resetting memory: {e}")
-            await interaction.followup.send('> Oops! Something went wrong. <')
+            logger.error(f"Error chat: {e}")
+            await interaction.followup.send('> **Error: {e}**')
 
     @client.tree.command(name="imagine", description="Generate image from text")
     async def imagine(interaction: discord.Interaction, *, prompt: str):
@@ -55,7 +55,7 @@ def run():
             await interaction.followup.send(f'> Reset ChatGPT conversation history < - <@{user_id}>')
         except Exception as e:
             logger.error(f"Error resetting memory: {e}")
-            await interaction.followup.send('> Oops! Something went wrong. <')
+            await interaction.followup.send('> **Error: Something went wrong, please try again later!**')
 
     client.run(os.getenv('DISCORD_TOKEN'))
 
