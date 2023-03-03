@@ -9,7 +9,7 @@ class ChatGPT:
 
     def get_response(self, user_id: str, text: str) -> str:
         prompt = text if self.memory is None else f'{self.memory.get(user_id)}\n\n{text}'
-        response = self.model.text_completion(f'{prompt} <|endoftext|>')
+        response = self.model.chat_completion(f'{prompt} <|endoftext|>')
         if self.memory is not None:
             self.memory.append(user_id, prompt)
             self.memory.append(user_id, response)

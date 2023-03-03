@@ -2,7 +2,7 @@ import openai
 
 
 class ModelInterface:
-    def text_completion(self, prompt: str) -> str:
+    def chat_completion(self, prompt: str) -> str:
         pass
 
     def image_generation(self, prompt: str) -> str:
@@ -16,15 +16,16 @@ class OpenAIModel(ModelInterface):
         self.max_tokens = max_tokens
         self.image_size = image_size
 
-    def text_completion(self, prompt: str) -> str:
+    def chat_completion(self, prompt: str) -> str:
+        messages = [{"role": "user", "content": prompt}]
         response = openai.ChatCompletion.create(
             model=self.model_engine,
-            prompt=prompt,
+            messages=messages,
             max_tokens=self.max_tokens,
             stop=None,
             temperature=0.5,
         )
-        text = response.choices[0].text.strip()
+        text = response.choices[0].message.content.strip()
         return text
 
     def image_generation(self, prompt: str) -> str:
