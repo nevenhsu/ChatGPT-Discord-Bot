@@ -11,7 +11,7 @@ class TestOpenAIModel(unittest.TestCase):
         self.image_size = '512x512'
         self.model = OpenAIModel(self.api_key, self.model_engine, self.max_tokens, self.image_size)
 
-    @patch('openai.Completion.create')
+    @patch('openai.ChatCompletion.create')
     def test_text_completion(self, mock_create):
         mock_create.return_value.choices[0].text = 'Test response'
         prompt = 'Test prompt'

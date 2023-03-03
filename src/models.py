@@ -17,7 +17,7 @@ class OpenAIModel(ModelInterface):
         self.image_size = image_size
 
     def text_completion(self, prompt: str) -> str:
-        response = openai.Completion.create(
+        response = openai.ChatCompletion.create(
             engine=self.model_engine,
             prompt=prompt,
             max_tokens=self.max_tokens,
