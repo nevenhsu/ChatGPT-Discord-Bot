@@ -7,6 +7,9 @@
 
 ChatGPT 串接到 Discord 上面，使得團隊在協作、溝通、效率上都能夠快速的提升，根據下面的安裝步驟，你也能在自己的 Discord 當中去導入 ChatGPT。
 
+## 更新
+- 2023/03/03 模型換成 chat completion: `gpt-3.5-turbo`
+
 
 ## 介紹
 在 Discord 裡的每個頻道中導入 ChatGPT Bot，只要在輸入框輸入 `/chat` 就會 有一個 `/chat message` 的關鍵字自動帶入，直接輸入文字即可與 ChatGPT 互動，如下圖所示：
@@ -60,10 +63,10 @@ ChatGPT 串接到 Discord 上面，使得團隊在協作、溝通、效率上都
             - value: `[由上方步驟一取得] sk-FoXXXX`
         2. 欲選擇的模型：
             - key: `OPENAI_MODEL_ENGINE`
-            - value: `text-davinci-003`  
-        3. ChatGPT 回傳的文字限制
-            - key: `OPENAI_MAX_TOKENS`
-            - value: `128`
+            - value: `gpt-3.5-turbo`  
+        3. ChatGPT 要讓助理扮演的角色詞（目前官方無釋出更多的使用方法，由玩家自行測試）
+            - key: `SYSTEM_MESSAGE`
+            - value: `You are a helpful assistant.`
         4. Discord Token:
             - key: `DISCORD_TOKEN`
             - value: `[由上方步驟一取得] MTA3NXXX`
@@ -85,6 +88,12 @@ ChatGPT 串接到 Discord 上面，使得團隊在協作、溝通、效率上都
 | `/chat` | 在輸入框直接輸入 `/chat` 會後綴 `message` 直接輸入文字，即可調用 ChatGPT 模型。|
 | `/reset` | ChatGPT 會記住前十次的問答紀錄，調用此指令則會清除。|
 | `/imagine` | 在輸入框輸入 `/imagine` 會後綴 `prompt` 直接輸入文字，會調用 DALL·E 2 模型，即可生成圖像。|
+
+
+## 支持我們
+如果你喜歡這個專案，願意[支持我們](https://www.buymeacoffee.com/explainthis)，可以請我們喝一杯咖啡，這會成為我們繼續前進的動力！
+
+[<a href="https://www.buymeacoffee.com/explainthis" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="45px" width="162px" alt="Buy Me A Coffee"></a>](https://www.buymeacoffee.com/explainthis)
 
 
 ## 相關專案

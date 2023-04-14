@@ -27,26 +27,26 @@ class DiscordClient(discord.Client):
 class Sender():
     async def send_message(self, interaction, send, receive):
         try:
-            user_id = interaction.user.id
-            header = f'> **{send[:50]}** - <@{str(user_id)}> \n\n '
+            name = interaction.channel.name
+            header = f'> **{send[:50]}** - <@{str(name)}> \n\n '
             await interaction.followup.send(header)
 
             responses = f"{receive}".split('\n\n')
             for res in responses:
                 await interaction.followup.send(res)
 
-            logger.info(f"{user_id} sent: {send}, response: {receive}")
+            logger.info(f"{name} sent: {send}, response: {receive}")
         except Exception as e:
             await interaction.followup.send(f"> **Error: {e}**")
             logger.exception(f"Error while sending:{send} in chatgpt model, error: {e}")
 
     async def send_image(self, interaction, send, receive):
         try:
-            user_id = interaction.user.id
-            response = f'> **{send[:50]}** - <@{str(user_id)}> \n\n'
+            name = interaction.channel.name
+            response = f'> **{send[:50]}** - <@{str(name)}> \n\n'
             await interaction.followup.send(response)
             await interaction.followup.send(receive)
-            logger.info(f"{user_id} sent: {send}, response: {receive}")
+            logger.info(f"{name} sent: {send}, response: {receive}")
         except Exception as e:
             await interaction.followup.send('> **Error: Something went wrong, please try again later!**')
             logger.exception(f"Error while sending:{send} in dalle model, error: {e}")

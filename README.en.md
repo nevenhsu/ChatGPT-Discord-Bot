@@ -7,6 +7,9 @@
 
 ChatGPT is integrated with Discord, allowing teams to collaborate, communicate, and be more efficient. By following the installation steps below, you too can import ChatGPT into your Discord.
 
+## Update
+- 2023/03/03 Model change to chat completion: `gpt-3.5-turbo`
+
 ## Introduction
 By importing the ChatGPT bot into every channel on Discord, simply enter `/chat` in the input box and the keyword `/chat message` will automatically be inserted. You can then enter text to interact with ChatGPT, as shown in the figure below:
 ![Demo](https://github.com/TheExplainthis/ChatGPT-Discord-Bot/blob/main/demo/chatgpt-discord-bot-en.gif)
@@ -58,10 +61,10 @@ By importing the ChatGPT bot into every channel on Discord, simply enter `/chat`
             - value: `[obtained from step one above] sk-FoXXXX`
         2. Desired model:
             - key: `OPENAI_MODEL_ENGINE`
-            - value: `text-davinci-003`
-        3. Text limit returned by ChatGPT
-            - key: `OPENAI_MAX_TOKENS`
-            - value: `128`
+            - value: `gpt-3.5-turbo`
+        3. ChatGPT wants the assistant to play the role of a keyword (currently, no further usage instructions have been officially released, and players can test it themselves).
+            - key: `SYSTEM_MESSAGE`
+            - value: `You are a helpful assistant.`
         4. Discord Token:
             - key: `DISCORD_TOKEN`
             - value: `[obtained from step one above] MTA3NXXX`
@@ -83,6 +86,11 @@ By importing the ChatGPT bot into every channel on Discord, simply enter `/chat`
 | `/chat` |  Type `/chat` in the input box followed by `message` to call the ChatGPT model and generate text.|
 | `/reset` | ChatGPT remembers the last ten questions and answers. Calling this command will clear the history.|
 | `/imagine` | Type `/imagine` in the input box followed by `prompt` to call the DALL·E 2 model and generate an image.|
+
+## Support Us
+Like this free project? Please consider [supporting us](https://www.buymeacoffee.com/explainthis) to keep it running.
+
+[<a href="https://www.buymeacoffee.com/explainthis" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="45px" width="162px" alt="Buy Me A Coffee"></a>](https://www.buymeacoffee.com/explainthis)
 
 ## Related Projects
 - [chatGPT-discord-bot](https://github.com/Zero6992/chatGPT-discord-bot)
