@@ -31,7 +31,7 @@ class Sender():
             header = f'> **{send[:50]}** - <@{str(name)}> \n\n '
             await interaction.followup.send(header)
 
-            responses = f"{receive}".split('\n\n')
+            responses = receive if len(receive) < 2000 else f"{receive}".split('\n\n')
             for res in responses:
                 await interaction.followup.send(res)
 
