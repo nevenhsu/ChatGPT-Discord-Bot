@@ -69,6 +69,7 @@ def run():
                 "> **Error: Something went wrong, please try again later!**"
             )
 
+    @client.tree.command(name="default", description="Reset to normal ChatGPT")
     async def default(interaction: discord.Interaction):
         id = interaction.channel.id
         name = interaction.channel.name
