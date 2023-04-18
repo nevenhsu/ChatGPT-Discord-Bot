@@ -32,6 +32,10 @@ class Sender():
             await interaction.followup.send(header)
 
             responses = [receive] if len(receive) < 2000 else receive.split('\n\n')
+
+            if "prompt:" in receive:
+                responses = receive.split('\n\n')
+
             for res in responses:
                 await interaction.followup.send(res)
 
