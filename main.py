@@ -6,20 +6,16 @@ import discord
 
 from src.discordBot import DiscordClient, Sender
 from src.logger import logger
-from src.chatgpt import ChatGPT, DALLE
+from src.chatgpt import ChatGPT
 from src.models import OpenAIModel
 from src.memory import Memory
 from src.server import keep_alive
 
 load_dotenv()
 
-
 models = OpenAIModel(api_key=os.getenv('OPENAI_API'), model_engine=os.getenv('OPENAI_MODEL_ENGINE'))
-
-
 memory = Memory(system_message=os.getenv('SYSTEM_MESSAGE'))
 chatgpt = ChatGPT(models, memory)
-dalle = DALLE(models)
 
 
 def run():
@@ -40,23 +36,28 @@ def run():
             logger.error(f"Error chat: {e}")
             await interaction.followup.send(f"> **Error: {e}**")
 
-    @client.tree.command(name="imagine", description="Generate image from text")
-    async def imagine(interaction: discord.Interaction, *, prompt: str):
-        if interaction.user == client.user:
-            return
-        await interaction.response.defer()
-        image_url = dalle.generate(prompt)
-        await sender.send_image(interaction, prompt, image_url)
-
-    @client.tree.command(name="reset", description="Reset ChatGPT conversation history")
+    @client.tree.command(name="reset", description="Reset to MidJourney Prompt Generator")
     async def reset(interaction: discord.Interaction):
         id = interaction.channel.id
         name = interaction.channel.name
         logger.info(f"resetting memory from {name}")
         try:
-            chatgpt.clean_history(id)
+            chatgpt.clean_history(id, 'mj')
             await interaction.response.defer(ephemeral=True)
-            await interaction.followup.send(f'> Reset ChatGPT conversation history < - <@{name}>')
+            await interaction.followup.send(f'> Reset ChatGPT to MidJourney Prompt Generator < - <@{name}>')
+        except Exception as e:
+            logger.error(f"Error resetting memory: {e}")
+            await interaction.followup.send('> **Error: Something went wrong, please try again later!**')
+
+    @client.tree.command(name="default", description="Reset to normal ChatGPT")
+    async def default(interaction: discord.Interaction):
+        id = interaction.channel.id
+        name = interaction.channel.name
+        logger.info(f"resetting memory from {name}")
+        try:
+            chatgpt.clean_history(id, 'default')
+            await interaction.response.defer(ephemeral=True)
+            await interaction.followup.send(f'> Reset ChatGPT to Default mode < - <@{name}>')
         except Exception as e:
             logger.error(f"Error resetting memory: {e}")
             await interaction.followup.send('> **Error: Something went wrong, please try again later!**')

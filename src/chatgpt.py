@@ -15,9 +15,8 @@ class ChatGPT:
         self.memory.append(user_id, {'role': role, 'content': content})
         return content
 
-    def clean_history(self, user_id: str) -> None:
-        self.memory.remove(user_id)
-        self.memory.append(user_id, {"role": "user", "content": "Please ignore all previous instructions."})
+    def clean_history(self, user_id: str, prompt: str) -> None:
+        self.memory.reset(user_id, prompt)
 
 
 class DALLE:
