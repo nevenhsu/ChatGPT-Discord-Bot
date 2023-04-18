@@ -1,4 +1,3 @@
-
 import os
 
 from dotenv import load_dotenv
@@ -13,8 +12,8 @@ from src.server import keep_alive
 
 load_dotenv()
 
-models = OpenAIModel(api_key=os.getenv('OPENAI_API'), model_engine=os.getenv('OPENAI_MODEL_ENGINE'))
-memory = Memory(system_message=os.getenv('SYSTEM_MESSAGE'))
+models = OpenAIModel(api_key=os.getenv("OPENAI_API"), model_engine=os.getenv("OPENAI_MODEL_ENGINE"))
+memory = Memory(system_message=os.getenv("SYSTEM_MESSAGE"))
 chatgpt = ChatGPT(models, memory)
 
 
@@ -42,29 +41,53 @@ def run():
         name = interaction.channel.name
         logger.info(f"resetting memory from {name}")
         try:
-            chatgpt.clean_history(id, 'mj')
+            chatgpt.clean_history(id, "mj")
             await interaction.response.defer(ephemeral=True)
-            await interaction.followup.send(f'> Reset ChatGPT to MidJourney Prompt Generator < - <@{name}>')
+            await interaction.followup.send(
+                f"> Reset ChatGPT to MidJourney Prompt Generator < - <@{name}>"
+            )
         except Exception as e:
             logger.error(f"Error resetting memory: {e}")
-            await interaction.followup.send('> **Error: Something went wrong, please try again later!**')
+            await interaction.followup.send(
+                "> **Error: Something went wrong, please try again later!**"
+            )
 
-    @client.tree.command(name="default", description="Reset to normal ChatGPT")
+    @client.tree.command(name="story", description="Reset to Short Story Generator")
+    async def story(interaction: discord.Interaction):
+        id = interaction.channel.id
+        name = interaction.channel.name
+        logger.info(f"resetting memory from {name}")
+        try:
+            chatgpt.clean_history(id, "story")
+            await interaction.response.defer(ephemeral=True)
+            await interaction.followup.send(
+                f"> Reset ChatGPT to Short Story Generator < - <@{name}>"
+            )
+        except Exception as e:
+            logger.error(f"Error resetting memory: {e}")
+            await interaction.followup.send(
+                "> **Error: Something went wrong, please try again later!**"
+            )
+
     async def default(interaction: discord.Interaction):
         id = interaction.channel.id
         name = interaction.channel.name
         logger.info(f"resetting memory from {name}")
         try:
-            chatgpt.clean_history(id, 'default')
+            chatgpt.clean_history(id, "default")
             await interaction.response.defer(ephemeral=True)
-            await interaction.followup.send(f'> Reset ChatGPT to default mode < - <@{name}>')
+            await interaction.followup.send(
+                f"> Reset ChatGPT to default mode < - <@{name}>"
+            )
         except Exception as e:
             logger.error(f"Error resetting memory: {e}")
-            await interaction.followup.send('> **Error: Something went wrong, please try again later!**')
+            await interaction.followup.send(
+                "> **Error: Something went wrong, please try again later!**"
+            )
 
-    client.run(os.getenv('DISCORD_TOKEN'))
+    client.run(os.getenv("DISCORD_TOKEN"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     keep_alive()
     run()

@@ -1,6 +1,12 @@
 prompts = {
-    "default": 'You are a helpful assistant',
-    "mj": '''
+    "default": "You are a helpful assistant",
+    "story": """
+I will give you the concept.
+Your task is to write a unique short story without plagiarizing using the concept. 
+- Generate a title.
+- Respond only in the language of the concept.
+""",
+    "mj": """
 As a prompt generator for a generative AI called "Midjourney", you will create image prompts for the AI to visualize. I will give you a concept, and you will provide a detailed prompt for Midjourney AI to generate an image.
 Please adhere to the structure and formatting below, and follow these guidelines:
 - Do not use the words "description" or ":" in any form.
@@ -31,5 +37,5 @@ Prompt 1:
 
 If you understand the rule, answer me yes.
 Wait for me to provide you the concept to generate prompts.
-''',
+""",
 }
