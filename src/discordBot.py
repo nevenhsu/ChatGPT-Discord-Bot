@@ -25,18 +25,18 @@ class DiscordClient(discord.Client):
 
 
 class Sender():
-    async def send_message(self, interaction, send, receive):
+    async def send_message(self, interaction, send, receive: str):
         try:
             name = interaction.channel.name
             header = f'> **{send[:50]}** - <@{str(name)}> \n\n '
             await interaction.followup.send(header)
 
-            txt = f"{receive}"
-            responses = receive if len(txt) < 2000 else txt.split('\n\n')
+            responses = [receive] if len(receive) < 2000 else receive.split('\n\n')
             for res in responses:
                 await interaction.followup.send(res)
 
-            logger.info(f"{name} sent: {send}, response: {txt}")
+            logger.info(f"{name} sent: {send}, response: {receive}")
+
         except Exception as e:
             await interaction.followup.send(f"> **Error: {e}**")
             logger.exception(f"Error while sending:{send} in chatgpt model, error: {e}")
