@@ -31,11 +31,12 @@ class Sender():
             header = f'> **{send[:50]}** - <@{str(name)}> \n\n '
             await interaction.followup.send(header)
 
-            responses = receive if len(receive) < 2000 else f"{receive}".split('\n\n')
+            txt = f"{receive}"
+            responses = receive if len(txt) < 2000 else txt.split('\n\n')
             for res in responses:
                 await interaction.followup.send(res)
 
-            logger.info(f"{name} sent: {send}, response: {receive}")
+            logger.info(f"{name} sent: {send}, response: {txt}")
         except Exception as e:
             await interaction.followup.send(f"> **Error: {e}**")
             logger.exception(f"Error while sending:{send} in chatgpt model, error: {e}")
