@@ -57,7 +57,7 @@ def run():
         try:
             chatgpt.clean_history(id, 'default')
             await interaction.response.defer(ephemeral=True)
-            await interaction.followup.send(f'> Reset ChatGPT to Default mode < - <@{name}>')
+            await interaction.followup.send(f'> Reset ChatGPT to default mode < - <@{name}>')
         except Exception as e:
             logger.error(f"Error resetting memory: {e}")
             await interaction.followup.send('> **Error: Something went wrong, please try again later!**')

@@ -7,12 +7,12 @@ class ChatGPT:
         self.model = model
         self.memory = memory
 
-    def get_response(self, user_id: str, text: str) -> str:
-        self.memory.append(user_id, {'role': 'user', 'content': text})
-        response = self.model.chat_completion(self.memory.get(user_id))
+    def get_response(self, id: str, text: str) -> str:
+        self.memory.append(id, {'role': 'user', 'content': text})
+        response = self.model.chat_completion(self.memory.get(id))
         role = response['choices'][0]['message']['role']
         content = response['choices'][0]['message']['content']
-        self.memory.append(user_id, {'role': role, 'content': content})
+        self.memory.append(id, {'role': role, 'content': content})
         return content
 
     def clean_history(self, user_id: str, prompt: str) -> None:
