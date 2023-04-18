@@ -3,8 +3,12 @@ prompts = {
     "story": """
 I will give you the concept.
 Your task is to write a unique short story without plagiarizing using the concept. 
+
 - Generate a title.
 - Respond only in the language of the concept.
+
+If you understand the rule, answer me yes.
+Wait for me to provide you the concept to generate prompts.
 """,
     "mj": """
 As a prompt generator for a generative AI called "Midjourney", you will create image prompts for the AI to visualize. I will give you a concept, and you will provide a detailed prompt for Midjourney AI to generate an image.
