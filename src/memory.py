@@ -1,6 +1,6 @@
 from typing import Dict
 from collections import defaultdict
-from prompts import prompts
+from .prompts import prompts
 
 
 class MemoryInterface:
