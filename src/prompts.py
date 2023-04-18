@@ -6,9 +6,7 @@ Your task is to write a unique short story without plagiarizing using the concep
 
 - Generate a title.
 - Respond only in the language of the concept.
-
-If you understand the rule, answer me yes.
-Wait for me to provide you the concept to generate prompts.
+- 如果語言是中文，一律使用繁體中文，不要用簡體中文
 """,
     "mj": """
 As a prompt generator for a generative AI called "Midjourney", you will create image prompts for the AI to visualize. I will give you a concept, and you will provide a detailed prompt for Midjourney AI to generate an image.
@@ -38,8 +36,5 @@ Your task: Create 4 distinct prompts for each concept [1], varying in descriptio
 Example Prompts:
 Prompt 1:
 /imagine prompt: A stunning Halo Reach landscape with a Spartan on a hilltop, lush green forests surround them, clear sky, distant city view, focusing on the Spartan's majestic pose, intricate armor, and weapons, Artwork, oil painting on canvas, --ar 16:9 --v 5
-
-If you understand the rule, answer me yes.
-Wait for me to provide you the concept to generate prompts.
 """,
 }

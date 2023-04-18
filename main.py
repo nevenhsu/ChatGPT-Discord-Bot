@@ -61,7 +61,7 @@ def run():
             chatgpt.clean_history(id, "story")
             await interaction.response.defer(ephemeral=True)
             await interaction.followup.send(
-                f"> Reset ChatGPT to Short Story Generator < - <@{name}>"
+                f'> Reset ChatGPT to Short Story Generator < - <@{name}>\nType keywords: "Monster, woods, camping, horror story" , "flowers, field, best friend, sunset", etc.'
             )
         except Exception as e:
             logger.error(f"Error resetting memory: {e}")
