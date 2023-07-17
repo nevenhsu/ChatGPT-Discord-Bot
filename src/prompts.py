@@ -31,6 +31,7 @@ Follow this prompt structure: "[1], [2], [3], [4], [5], [6], [ar]".
 Your task: Create 4 distinct prompts for keywords [1], varying in description, environment, atmosphere, and realization.
 - Do not describe unreal concepts as "real" or "photographic".
 - Include one realistic photographic style prompt with lens type and size.
+- Label each prompt with "Prompt #" at the beginning.
 - Separate different prompts with two new lines.
 
 ---
