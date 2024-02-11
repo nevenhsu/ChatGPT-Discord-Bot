@@ -6,4 +6,4 @@ services:
     build: .
     restart: always
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "8080:8080"
